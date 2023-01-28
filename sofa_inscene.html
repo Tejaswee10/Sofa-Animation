@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - animation - keyframes</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">		
+		<style>
+			body {
+				
+				color: #000;
+			}
+h1{
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	text-align: center;
+	
+}
+#landpage a{
+	color: black;
+	text-decoration: none;  
+}		
+#landpage button{
+			font-family: 'Times New Roman', Times, serif;
+                background-color: rgb(255, 255, 255);
+                border-radius: 30px;  
+				height: 50px;
+                width:300px;
+                 
+				color: #000;
+				
+				                  
+		}
+			
+ #instructions {
+                color: white;  
+				background-color: rgb(0, 0, 0);				
+              	padding: 20px;
+                top: 10px;
+                font-family: monospace;               
+               
+            }
+          
+#animation-buttons button{
+				font-family: 'Times New Roman', Times, serif;
+                background-color: rgb(255, 255, 255);
+                border-radius: 30px;                        
+                top: 300px;
+                margin: 20px;
+                height: 50px;
+                width:300px;
+              
+            }
+		
+
+.tabcontent {
+		  display: none;
+		  padding: 6px 12px;
+		
+		  border-top: none;
+		}
+		nav {
+			color: white;
+	margin: 100px auto; 
+	text-align: center;
+}
+
+.dropdown{
+	background-color: #000;
+	top: -20px;
+
+}
+.dropdown-toggle{
+	background-color: rgb(0, 0, 0);border: none;font-family: 'Times New Roman', Times, serif;font-size: 20px;width:450px;text-align: left;
+}
+.dropdown-menu
+{
+	width: 450px;
+	
+}
+ul{
+	font-family: 'Times New Roman', Times, serif;
+}
+.appearance-btn{
+	height: 40px;
+	width: 40px;
+	
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	border: none;
+	margin-top: 10px;
+	
+}
+		.accordion{
+width: 350px;
+font-family: 'Times New Roman', Times, serif;
+
+}
+.accordion-item{
+background:white;
+border: none;box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);border-radius: 30px;
+}
+.accordion-button{
+    background-color: aquamarine;
+    width:350px;
+}
+
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: var(--bs-accordion-btn-focus-border-color);
+    /* outline: 0; */
+    box-shadow:none ;
+	color: #000000;
+	
+}
+.appearance-btn:hover{
+	border: 3px solid white;
+
+}
+.cart button{
+	width: 60px;
+}
+.dropdown-menu{
+	background-color: #000;
+	color: white;
+}
+.dropdown-menu li a{
+	color: #ffffff;
+}
+  
+.dropdown-menu li a:focus{
+	background-color: black
+}
+.dropdown li:focus{
+	background-color: black;
+}
+.switch-green > .switch-input:checked ~ .switch-label {
+  background: #4fb845;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 56px;
+  height: 20px;
+  padding: 3px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  background-image: -webkit-linear-gradient(top, #eeeeee, white 25px);
+  background-image: -moz-linear-gradient(top, #eeeeee, white 25px);
+  background-image: -o-linear-gradient(top, #eeeeee, white 25px);
+  background-image: linear-gradient(to bottom, #eeeeee, white 25px);
+}
+
+.switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: 10px;
+  text-transform: uppercase;
+ 
+  border-radius: inherit;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+  -webkit-transition-property: opacity background;
+  -moz-transition-property: opacity background;
+  -o-transition-property: opacity background;
+  transition-property: opacity background;
+}
+.switch-label:before, .switch-label:after {
+  position: absolute;
+  top: 50%;
+  margin-top: -.5em;
+  line-height: 1;
+  -webkit-transition: inherit;
+  -moz-transition: inherit;
+  -o-transition: inherit;
+  transition: inherit;
+}
+.switch-label:before {
+  content: attr(data-off);
+  right: 11px;
+  
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.switch-label:after {
+  content: attr(data-on);
+  left: 11px;
+  color: white;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+  background: #47a8d8;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.switch-input:checked ~ .switch-label:before {
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label:after {
+  opacity: 1;
+}
+
+.switch-handle {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+
+  -webkit-transition: left 0.15s ease-out;
+  -moz-transition: left 0.15s ease-out;
+  -o-transition: left 0.15s ease-out;
+  transition: left 0.15s ease-out;
+}
+.switch-handle:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -6px 0 0 -6px;
+  width: 12px;
+  height: 12px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+  
+}
+.switch-input:checked ~ .switch-handle {
+  left: 40px;
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+		</style>
+	</head>
+
+	<body>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>    <div class="dropdown">
+
+
+		<script type="importmap">
+			{
+			  "imports": {
+				"three": "./three.module.js"
+			
+				
+			  }
+			}
+		  </script>
+		  
+	  
+		
+
+		  <div class="row gx-0">
+			
+		<div class="col-12 col-lg-8">
+		  <div id="container"></div>
+		</div>
+	
+        <div id="instructions" class="col-12 col-lg-4">
+			<div id="landpage" class="tabcontent">
+				
+				<br>
+				<h1>Recliner Sofa</h1>
+				<hr>
+				<h1>$299</h1>
+				<center>
+	<br>
+		<button onclick="openTab(event, 'Configuration')" ><a href="#Configuration" class="tablinks"  >Configuration</a></button><br><br/>
+		<button onclick="openTab(event, 'Animation')"> <a href="#Animation" class="tablinks" >Animation</a></button><br><br>
+		<button onclick="openTab(event, 'Lighting')"><a href="#Lighting" class="tablinks" >Lighting</a></button><br><br>
+		<button  onclick="openTab(event, 'Settings')"> <a href="#settings" class="tablinks">Settings</a></button>	
+		
+			
+			
+			<br>
+	
+	
+	<br><br>
+	<div class="d-flex justify-content-center cart">
+		<button style="border-radius: 10px; width: 180px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+		<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+		</svg>   Add to Cart</button>
+		
+		<button style="border-radius: 10px; width: 180px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+  <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+</svg>  Buy Now</button>
+	</div>
+			 
+			 
+			</center>
+			</div>
+
+			<div id="Configuration" class="tabcontent">
+				<br>
+				
+				<h1><a href="" style="color: rgb(255, 255, 255);float: left;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses-fill" viewBox="0 0 16 16">
+					<path d="M7.207 1a1 1 0 0 0-1.414 0L.146 6.646a.5.5 0 0 0 .708.708L1 7.207V12.5A1.5 1.5 0 0 0 2.5 14h.55a2.51 2.51 0 0 1-.05-.5V9.415a1.5 1.5 0 0 1-.56-2.475l5.353-5.354L7.207 1Z"/>
+					<path d="M8.793 2a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Z"/>
+				  </svg></a>Recliner Sofa</h1>
+				<hr/>
+				<hr>
+				
+
+				
+				<div class="dropdown" >
+					<button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+					  Configuration
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+					  <li><a class="dropdown-item" href="#Animation" onclick="openTab(event, 'Animation')">Animation</a></li>
+					  <li><a class="dropdown-item" href="#Lighting" onclick="openTab(event, 'Lighting')">Lighting</a></li>
+					  <li><a class="dropdown-item" href="#Settings" onclick="openTab(event, 'Settings')">Settings</a></li>
+					</ul>
+				</div>
+				<br>
+				<div class="accordion" id="accordionExample">
+
+					<div class="accordion-item" style=" border: none ; background: none; box-shadow: 0 4px 4px -2px rgba(255, 255, 255, 0.5);border-radius: 30px;">
+					  <h2 class="accordion-header" id="headingOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: #ffffff; border: none; border-radius: 30px; width: 350px; height: 50px;color:black; " >
+							Sofa Fabric
+						</button>
+					  </h2>
+					  <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="color: #ffffff;">
+							Customize your Sofa fabric color.
+							
+							<div id="sofaColorControls" >
+								<button class="appearance-btn" style="background-color:rgb(221, 194, 154)" data-color="1,1,1,1" data-name="cream"></button>
+								<button class="appearance-btn" style="background-color:rgb(237, 219, 23)" data-color="0.84,0.74,0.0,1" data-name="yellow"></button>
+								<button class="appearance-btn" style="background-color:rgb(152, 183, 94)" data-color="0.4,0.8,0,2" data-name="green"></button>
+								<button class="appearance-btn" style="background-color:rgb(224, 122, 46)" data-color="0.89,0.27,0,15" data-name="orange"></button>
+								<button class="appearance-btn" style="background-color:rgb(17, 119, 116)" data-color="0.0,0.3,0.7,1" data-name="blue"></button>
+								<button class="appearance-btn" style="background-color:rgb(50, 50, 50)" data-color="0.03,0.03,0.03,1" data-name="black"></button>
+								<br>
+								<span class="colorPicker"><input id="body-color" type="color" value="#ff0000"></input><br/></span>
+							
+							
+							</div>
+							  
+						</div>
+					  </div>
+					</div>
+			
+
+
+				
+			</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+		
+			<div id="Animation" class="tabcontent">
+				<br>
+				
+				  <h1><a href="" style="color: rgb(255, 255, 255);float: left;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses-fill" viewBox="0 0 16 16">
+					<path d="M7.207 1a1 1 0 0 0-1.414 0L.146 6.646a.5.5 0 0 0 .708.708L1 7.207V12.5A1.5 1.5 0 0 0 2.5 14h.55a2.51 2.51 0 0 1-.05-.5V9.415a1.5 1.5 0 0 1-.56-2.475l5.353-5.354L7.207 1Z"/>
+					<path d="M8.793 2a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Z"/>
+				  </svg></a>Recliner Sofa</h1>
+				<hr/>
+				<hr>
+				
+				<div class="dropdown" >
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+					  Animation
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+					  <li><a class="dropdown-item" href="#Configuration" onclick="openTab(event, 'Configuration')">Configuration</a></li>
+					  <li><a class="dropdown-item" href="#Lighting" href="#Lighting" onclick="openTab(event, 'Lighting')">Lighting</a></li>
+					  <li><a class="dropdown-item" href="#Settings" onclick="openTab(event, 'Settings')">Settings</a></li>
+					</ul>
+				</div>
+				
+				<div id="animation-buttons">	<Center>
+					<button id="button-click" >Total Body Animation </button> <br>
+					<button id="button-click2" >Leg Rest Animation  </button><br>
+					<button id="button-click3" >Back Rest Animation  </button><br>
+					<button id="button-click4" >Keyboard Stand Animation</button><br>
+					<button id="button-click5" >Laptop Stand Animation </button><br>
+				</Center></div>
+			</div>
+
+
+
+
+
+		
+			<div id="Lighting" class="tabcontent">
+				<br>
+				<h1><a href="" style="color: rgb(255, 255, 255);float: left;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses-fill" viewBox="0 0 16 16">
+					<path d="M7.207 1a1 1 0 0 0-1.414 0L.146 6.646a.5.5 0 0 0 .708.708L1 7.207V12.5A1.5 1.5 0 0 0 2.5 14h.55a2.51 2.51 0 0 1-.05-.5V9.415a1.5 1.5 0 0 1-.56-2.475l5.353-5.354L7.207 1Z"/>
+					<path d="M8.793 2a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Z"/>
+				  </svg></a>Recliner Sofa</h1>
+				<hr/>
+				<hr>
+				
+				<div class="dropdown" >
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+					  Lighting
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+					<li><a class="dropdown-item" href="#Configuration" onclick="openTab(event, 'Configuration')">Configuration</a></li>
+					  <li><a class="dropdown-item" href="#Animation" onclick="openTab(event, 'Animation')">Animation</a></li>
+				
+					  <li><a class="dropdown-item" href="#Settings" onclick="openTab(event, 'Settings')">Settings</a></li>
+					</ul>
+				</div>
+
+				<br>
+				
+		
+
+			
+
+
+				<div class="accordion" id="accordionExample">
+
+					<div class="accordion-item" style=" border: none ; background: none; box-shadow: 0 4px 4px -2px rgba(255, 255, 255, 0.5);border-radius: 30px;">
+					  <h2 class="accordion-header" id="headingOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: #ffffff; border: none; border-radius: 30px; width: 350px; height: 50px;color:black; " >
+							Controls
+						</button>
+					  </h2>
+					  <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="color: #ffffff;">
+
+<label for="">Light</label>
+							<label class="switch switch-green">
+								<input type="checkbox" class="switch-input" checked>
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							  </label>
+							  <br>
+							
+							<label class="form-label" for="customRange1">Intensity</label>
+							<div class="range">
+							<input type="range" class="form-range" id="customRange1" />
+							</div>
+														
+							  
+						</div>
+					  </div>
+					</div>
+					<br>
+					<div class="accordion-item" style=" border: none ; background: none; box-shadow: 0 4px 4px -2px rgba(255, 255, 255, 0.5);border-radius: 30px;">
+						<h2 class="accordion-header" id="headingTwo">
+						  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" style="background-color: #ffffff; border: none; border-radius: 30px; width: 350px; height: 50px;color:black; " >
+							  Articrafts
+						  </button>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+						  <div class="accordion-body" style="color: #ffffff;">
+							  
+							  
+							</div>  
+								
+						  </div>
+						</div>
+
+
+
+
+					</div>
+
+
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+			<div id="Settings" class="tabcontent">
+				<br>
+				<h1><a href="" style="color: rgb(255, 255, 255);float: left;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses-fill" viewBox="0 0 16 16">
+					<path d="M7.207 1a1 1 0 0 0-1.414 0L.146 6.646a.5.5 0 0 0 .708.708L1 7.207V12.5A1.5 1.5 0 0 0 2.5 14h.55a2.51 2.51 0 0 1-.05-.5V9.415a1.5 1.5 0 0 1-.56-2.475l5.353-5.354L7.207 1Z"/>
+					<path d="M8.793 2a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Z"/>
+				  </svg></a>Recliner Sofa</h1>
+				<hr>
+				<hr>
+				
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+					  Settings
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+						<li><a class="dropdown-item" href="#Configuration" onclick="openTab(event, 'Configuration')">Configuration</a></li>
+						<li><a class="dropdown-item" href="#Animation" onclick="openTab(event, 'Animation')">Animation</a></li>
+					  <li><a class="dropdown-item" href="#Lighting" href="#Lighting" onclick="openTab(event, 'Lighting')">Lighting</a></li>
+					  
+					</ul>
+				</div>
+				
+			
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+		</div>
+		
+
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		  
+
+		<script>
+			tabcontent1= document.getElementById("landpage");
+			tabcontent1.style.display = "block";
+		   function openTab(evt,Name) {
+			 var i, tabcontent, tablinks;
+   
+			 tabcontent = document.getElementsByClassName("tabcontent");
+			 for (i = 0; i < tabcontent.length; i++) {
+			   tabcontent[i].style.display = "none";
+			 }
+			 tablinks = document.getElementsByClassName("tablinks");
+			 for (i = 0; i < tablinks.length; i++) {
+			   tablinks[i].className = tablinks[i].className.replace(" active", "");
+			 }
+			 document.getElementById(Name).style.display = "block";
+			 evt.currentTarget.className += " active";
+		   }
+		   </script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+
+			import Stats from './stats.module.js';
+
+			import { OrbitControls } from './OrbitControls.js';
+			import { RoomEnvironment } from './RoomEnvironment.js';
+
+			import { GLTFLoader } from './GLTFLoader.js';
+			import { DRACOLoader } from './DRACOLoader.js';
+
+			let mixer;
+
+			const clock = new THREE.Clock();
+			const container = document.getElementById( 'container' );
+
+			const stats = new Stats();
+			container.appendChild( stats.dom );
+
+			const renderer = new THREE.WebGLRenderer( { antialias: true } );
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.outputEncoding = THREE.sRGBEncoding;
+			container.appendChild( renderer.domElement );
+
+			const pmremGenerator = new THREE.PMREMGenerator( renderer );
+
+			const scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0xbfe3dd );
+			scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
+
+			const camera = new THREE.PerspectiveCamera( 400, window.innerWidth / window.innerHeight, 1, 100 );
+			camera.position.set( 1, 4, 8 );
+
+			const controls = new OrbitControls( camera, renderer.domElement );
+			controls.target.set( 3, 1, 0 );
+			controls.update();
+			controls.enablePan = false;
+			controls.enableDamping = true;
+
+			const dracoLoader = new DRACOLoader();
+			dracoLoader.setDecoderPath( './' );
+
+
+
+			
+
+
+
+
+
+
+			const loader = new GLTFLoader();
+			loader.setDRACOLoader( dracoLoader );
+			loader.load( 'ReclinerChairScene.glb', function ( gltf ) {
+
+				const model = gltf.scene;
+				model.position.set( 1, 0, 0 );
+				model.scale.set( 1,1,1);
+				scene.add( model );
+
+				mixer = new THREE.AnimationMixer( model );
+
+
+				const bodyMaterial = new THREE.MeshPhysicalMaterial( {
+					color: 0xff0000, metalness: 0.0, roughness: 0.5,  sheen: 0.5
+				} );
+
+			const bodyColorInput = document.getElementById( 'body-color' );
+			bodyColorInput.addEventListener( 'input', function () {
+
+					bodyMaterial.color.set( this.value );
+
+			} );
+				
+				//model.material.map=bodyMaterial;
+				//const carModel = gltf.scene.children[ 0 ];
+
+				//carModel.getObjectByName( 'body' ).material = bodyMaterial;
+
+				//const model = gltf.scene.children[ 0 ];
+
+				model.material = bodyMaterial;
+
+
+
+				let buttonClicks=document.getElementById("button-click");
+
+
+				buttonClicks.onclick=function(event){
+					event.preventDefault();
+					let animation=mixer.clipAction( gltf.animations[ 0 ] ).play();
+					animation.setLoop(THREE.LoopOnce);
+					animation.play();
+				}
+
+
+				let buttonClick2=document.getElementById("button-click2");
+
+
+				buttonClick2.onclick=function(event){
+					event.preventDefault();
+					let animation=mixer.clipAction( gltf.animations[ 1 ] ).play();
+					animation.setLoop(THREE.LoopOnce);
+					animation.play();
+				}
+				
+				let buttonClick3=document.getElementById("button-click3");
+
+
+				buttonClick3.onclick=function(event){
+					event.preventDefault();
+					let animation=mixer.clipAction( gltf.animations[ 2 ] ).play();
+					animation.setLoop(THREE.LoopOnce);
+					animation.play();
+				}
+				
+				let buttonClick4=document.getElementById("button-click4");
+
+
+				buttonClick4.onclick=function(event){
+					event.preventDefault();
+					let animation=mixer.clipAction( gltf.animations[ 3 ] ).play();
+					animation.setLoop(THREE.LoopOnce);
+					animation.play();
+				}
+
+				let buttonClick5=document.getElementById("button-click5");
+
+
+				buttonClick5.onclick=function(event){
+					event.preventDefault();
+					let animation=mixer.clipAction( gltf.animations[ 4 ] ).play();
+					animation.setLoop(THREE.LoopOnce);
+					animation.play();
+				}
+				
+				
+
+
+				
+
+				animate();
+
+			}, undefined, function ( e ) {
+
+				console.error( e );
+
+			} );
+
+			window.onresize = function () {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			};
+
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				const delta = clock.getDelta();
+
+				mixer.update( delta );
+
+				controls.update();
+
+				stats.update();
+
+				renderer.render( scene, camera );
+
+			}
+
+			function selectVariant( scene, parser, extension, variantName ) {
+
+				const variantIndex = extension.variants.findIndex( ( v ) => v.name.includes( variantName ) );
+
+				scene.traverse( async ( object ) => {
+
+					if ( ! object.isMesh || ! object.userData.gltfExtensions ) return;
+
+					const meshVariantDef = object.userData.gltfExtensions[ 'KHR_materials_variants' ];
+
+					if ( ! meshVariantDef ) return;
+
+					if ( ! object.userData.originalMaterial ) {
+
+						object.userData.originalMaterial = object.material;
+
+					}
+
+					const mapping = meshVariantDef.mappings
+						.find( ( mapping ) => mapping.variants.includes( variantIndex ) );
+
+					if ( mapping ) {
+
+						object.material = await parser.getDependency( 'material', mapping.material );
+						parser.assignFinalMaterial( object );
+
+					} else {
+
+						object.material = object.userData.originalMaterial;
+
+					}
+
+					render();
+
+				} );
+
+				}
+			
+		</script>
+
+	</body>
+
+</html>
